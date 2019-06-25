@@ -19,9 +19,15 @@ rdd.collect()
 rdd=sc.textFile("file:\\" + file)
 rdd.first()
 
-甚至可以sc.wholeTextFiles读入整个文件夹的所有文件。但是要特别注意，这种读法，RDD中的每个item实际上是一个形如(文件名，文件所有内容)的元组。读入整个文件夹的所有文件。
+可以sc.wholeTextFiles读入整个文件夹的所有文件。但是要特别注意，这种读法，RDD中的每个item实际上是一个形如(文件名，文件所有内容)的元组。读入整个文件夹的所有文件。
 
-
+RDDs可以进行一系列的变换得到新的RDD，有点类似列表推导式的操作，先给出一些RDD上最常用到的transformation：
+map() 对RDD的每一个item都执行同一个操作
+flatMap() 对RDD中的item执行同一个操作以后得到一个list，然后以平铺的方式把这些list里所有的结果组成新的list
+filter() 筛选出来满足条件的item
+distinct() 对RDD中的item去重
+sample() 从RDD中的item中采样一部分出来，有放回或者无放回
+sortBy() 对RDD中的item进行排序
 
 
 
