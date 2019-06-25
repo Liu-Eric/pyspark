@@ -1,0 +1,33 @@
+https://blog.csdn.net/cymy001/article/details/78483723
+
+import pyspark
+from pyspark import SparkContext as sc
+from pyspark import SparkConf
+conf=SparkConf().setAppName("miniProject").setMaster("local[*]")
+sc=SparkContext.getOrCreate(conf)
+#任何Spark程序都是SparkContext开始的，SparkContext的初始化需要一个SparkConf对象，SparkConf包含了Spark集群配置的各种参数(比如主节点的URL)。
+
+SparkSession是Spark 2.0引入的新概念。SparkSession为用户提供了统一的切入点，来让用户学习spark的各项功能。 
+在spark的早期版本中，SparkContext是spark的主要切入点，由于RDD是主要的API，我们通过sparkcontext来创建和操作RDD。对于每个其他的API，我们需要使用不同的context。例如，对于Streming，我们需要使用StreamingContext；对于sql，使用sqlContext；对于hive，使用hiveContext。但是随着DataSet和DataFrame的API逐渐成为标准的API，就需要为他们建立接入点。
+所以在spark2.0中，引入SparkSession作为DataSet和DataFrame API的切入点。SparkSession实质上是SQLContext和HiveContext的组合(未来可能还会加上StreamingContext)，所以在SQLContext和HiveContext上可用的API在SparkSession上同样是可以使用的。SparkSession内部封装了SparkContext，所以计算实际上是由SparkContext完成的。
+
+本地内存中已经有一份序列数据(比如python的list)，可以通过sc.parallelize去初始化一个RDD。当执行这个操作以后，list中的元素将被自动分块(partitioned)，并且把每一块送到集群上的不同机器上。
+rdd = sc.parallelize([1,2,3,4,5])
+rdd.collect()
+
+创建RDD的另一个方法是直接把文本读到RDD。文本的每一行都会被当做一个item，不过需要注意的一点是，Spark一般默认给定的路径是指向HDFS的，如果要从本地读取文件的话，给一个file://开头（windows下是以file:\\开头）的全局路径。
+rdd=sc.textFile("file:\\" + file)
+rdd.first()
+
+甚至可以sc.wholeTextFiles读入整个文件夹的所有文件。但是要特别注意，这种读法，RDD中的每个item实际上是一个形如(文件名，文件所有内容)的元组。读入整个文件夹的所有文件。
+
+
+
+
+
+
+
+
+
+
+
