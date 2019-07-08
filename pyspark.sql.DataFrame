@@ -6,3 +6,41 @@ dfA = df.alias("new_name") #给data起别名，用以自己聚合自己
 df.approxQuantile([cols],probabilities) #返回百分位数
 df.cache() #缓存dataframer
 df.coalesce(numPartitions) #返回dataframe基于给定分区数
+df.collect() #Returns all the records as a list of Row.
+df.columns #返回列名
+df.corr(col1, col2, method=None) #返回相关系数 df.cov(col1, col2) #返回协方差
+df.count() #统计行数
+df.createOrReplaceTempView #创建临时表
+df.describe(*cols) #dataframe数据统计
+df.distinct() #Returns a new DataFrame containing the distinct rows in this DataFrame.
+df.drop(*cols) #Returns a new DataFrame that drops the specified column.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
