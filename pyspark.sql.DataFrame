@@ -1,0 +1,8 @@
+class pyspark.sql.DataFrame(jdf, sql_ctx)[source]
+A distributed collection of data grouped into named columns.
+col = df.colName #选择某一列
+df.agg({'colA':'max','colB':'avg'}) #整个dataframe聚合
+dfA = df.alias("new_name") #给data起别名，用以自己聚合自己
+df.approxQuantile([cols],probabilities) #返回百分位数
+df.cache() #缓存dataframer
+df.coalesce(numPartitions) #返回dataframe基于给定分区数
