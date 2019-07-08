@@ -32,6 +32,9 @@ sc_conf=SparkConf().setAppName("miniProject").setMaster("local[*]").set('spark.e
 sc = SparkContext(conf=sc_conf)
 sc=SparkContext.getOrCreate(conf)
 ============================================================
- 
 SparkSession是Spark 2.0引入的新概念。SparkSession为用户提供了统一的切入点，来让用户学习spark的各项功能。所以在spark2.0中，引入SparkSession作为DataSet和DataFrame API的切入点。SparkSession实质上是SQLContext和HiveContext的组合(未来可能还会加上StreamingContext)，所以在SQLContext和HiveContext上可用的API在SparkSession上同样是可以使用的。SparkSession内部封装了SparkContext，所以计算实际上是由SparkContext完成的。
-
+from pyspark.sql import SparkSession
+class pyspark.sql.SparkSession(sparkContext, jsparkSession=None)
+用DataSet和DataFrame编写Spark程序的入口
+功能：创建DataFrame，以关系型数据库中表的形式生成DataFrame，之后便可以执行SQL语句，适合小数据量的操作
+SparkSession.createDataFrame(data, schema=None, samplingRatio=None,verifySchema=True) #基于data创建DataFrame.
